@@ -344,8 +344,160 @@ fi
 
 
 
+if [[ $COMMAND == "monthly" ]]
+then
+    out=$(echo "$FILTERED" | sort -t "," -k 2,2 | \
+        awk \
+        -F "," \
+        -v width="$WIDTH" \
+        'BEGIN {
+            curr = ""
+            currSum = 0
+            if (width == 0)
+            {
+                width = 10000
+            }
+        } {
+            if (width == "")
+            {
+                if (curr == "")
+                {
+                    curr = substr($2, 1, length($2)-3)
+                    currSum = 1
+                    next
+                }
+                else if (curr != substr($2, 1, length($2)-3))
+                {
+                    printf("%s: %d\n", curr, currSum)
+                    curr = substr($2, 1, length($2)-3)
+                    currSum = 1
+                }
+                else 
+                {
+                    currSum++
+                }
+            }
+            else
+            {
+                if (curr == "")
+                {
+                    curr = substr($2, 1, length($2)-3)
+                    currSum = 1
+                    next
+                }
+                else if (curr != substr($2, 1, length($2)-3))
+                {
+                    printf("%s: ", curr)
+                    for (i = 0; i < (currSum/width); i++)
+                    {
+                        printf("#")
+                    }
+                    printf("\n")
+                    curr = substr($2, 1, length($2)-3)
+                    currSum = 1
+                }
+                else 
+                {
+                    currSum++
+                }
+
+            }
+        } END {
+            if (width == "")
+            {
+                printf("%s: %d", curr, currSum)
+            }
+            else 
+            {
+                printf("%s: ", curr)
+                for (i = 0; i < (currSum/width); i++)
+                {
+                    printf("#")
+                }
+                printf("\n")
+
+            }
+        }')
+    echo "$out"
+fi
 
 
+if [[ $COMMAND == "yearly" ]]
+then
+    out=$(echo "$FILTERED" | sort -t "," -k 2,2 | \
+        awk \
+        -F "," \
+        -v width="$WIDTH" \
+        'BEGIN {
+            curr = ""
+            currSum = 0
+            if (width == 0)
+            {
+                width = 500
+            }
+        } {
+            if (width == "")
+            {
+                if (curr == "")
+                {
+                    curr = substr($2, 1, length($2)-6)
+                    currSum = 1
+                    next
+                }
+                else if (curr != substr($2, 1, length($2)-6))
+                {
+                    printf("%s: %d\n", curr, currSum)
+                    curr = substr($2, 1, length($2)-6)
+                    currSum = 1
+                }
+                else 
+                {
+                    currSum++
+                }
+            }
+            else
+            {
+                if (curr == "")
+                {
+                    curr = substr($2, 1, length($2)-6)
+                    currSum = 1
+                    next
+                }
+                else if (curr != substr($2, 1, length($2)-6))
+                {
+                    printf("%s: ", curr)
+                    for (i = 0; i < (currSum/width); i++)
+                    {
+                        printf("#")
+                    }
+                    printf("\n")
+                    curr = substr($2, 1, length($2)-6)
+                    currSum = 1
+                }
+                else 
+                {
+                    currSum++
+                }
+
+            }
+        } END {
+            if (width == "")
+            {
+                printf("%s: %d", curr, currSum)
+            }
+            else 
+            {
+                printf("%s: ", curr)
+                for (i = 0; i < (currSum/width); i++)
+                {
+                    printf("#")
+                }
+                printf("\n")
+
+            }
+        }')
+    echo "$out"
+fi
 
 
 
