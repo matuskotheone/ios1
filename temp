@@ -1,0 +1,54 @@
+#if [ -z "$FILE" ] && [ -z "$FILE_GZ" ] && [ -a -z "$FILE_BZ2" ]
+#then
+#    READ_FILES="cat"
+#else 
+    #READ_FILES="cat $FILE -"
+    #gzip -c -k $FILE_GZ | bzip2 -c -k $FILE_BZ2 | cat $FILE -"
+#fi
+#
+    women=$(echo "$FILTERED" | \
+        awk \
+        -v men=$men \
+        'END {print (NR - men)}')
+    echo "muzov je :$men"
+    echo "zien je :$women"
+            else 
+            {
+                printf("0-5   :")
+                for (i = 0; i < (count5/width); i++) 
+                    printf("#")
+                printf("\n6-15  :")  
+                for (i = 0; i < (count15/width); i++) 
+                    printf("#")
+                printf("\n16-25 :")  
+                for (i = 0; i < (count25/width); i++) 
+                    printf("#")
+                printf("\n26-35 :")  
+                for (i = 0; i < (count35/width); i++) 
+                    printf("#")
+                printf("\n36-45 :") 
+                for (i = 0; i < (count45/width); i++) 
+                    printf("#")
+                printf("\n46-55 :")    
+                for (i = 0; i < (count55/width); i++) 
+                    printf("#")
+                printf("\n56-65 :")    
+                for (i = 0; i < (count65/width); i++) 
+                    printf("#")
+                printf("\n66-75 :")    
+                for (i = 0; i < (count75/width); i++) 
+                    printf("#")
+                printf("\n76-85 :")    
+                for (i = 0; i < (count85/width); i++) 
+                    printf("#")
+                printf("\n86-95 :")    
+                for (i = 0; i < (count95/width); i++) 
+                    printf("#")
+                printf("\n96-105:")     
+                for (i = 0; i < (count105/width); i++) 
+                    printf("#")
+                printf("\n>105  :")    
+                for (i = 0; i < (countel/width); i++) 
+                    printf("#")
+
+            }
