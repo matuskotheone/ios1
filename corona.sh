@@ -76,6 +76,10 @@ while [[ "$#" -gt 0 ]]; do
         COMMAND="$1"
         shift
         ;;
+    daily)
+        COMMAND="$1"
+        shift
+        ;;
     districts)
         COMMAND="$1"
         shift
@@ -266,13 +270,80 @@ then
         }')
     echo "$out"
 fi
-        
-        
 
 
 
+if [[ $COMMAND == "daily" ]]
+then
+    out=$(echo "$FILTERED" | sort -t "," -k 2,2 | \
+        awk \
+        -F "," \
+        -v width="$WIDTH" \
+        'BEGIN {
+            curr = ""
+            currSum = 0
+            if (width == 0)
+            {
+                width = 500
+            }
+        } {
+            if (width == "")
+            {
+                if (curr == "")
+                {
+                    curr = $2
+                    currSum = 1
+                    next
+                }
+                else if (curr != $2)
+                {
+                    printf("%s: %d\n", curr, currSum)
+                    curr = $2
+                    currSum = 1
+                }
+                else 
+                {
+                    currSum++
+                }
+            }
+            else
+            {
+                if (curr == "")
+                {
+                    curr = $2
+                    currSum = 1
+                    next
+                }
+                else if (curr != $2)
+                {
+                    printf("%s: ", curr)
+                    for (i = 0; i < (currSum/width); i++)
+                    {
+                        printf("#")
+                    }
+                    printf("\n")
+                    curr = $2
+                    currSum = 1
+                }
+                else 
+                {
+                    currSum++
+                }
 
-#if [[ $COMMAND == "daily" ]]
+            }
+        } END {
+            printf("%s: ", curr)
+            for (i = 0; i < (currSum/width); i++)
+            {
+                printf("#")
+            }
+            printf("\n")
+        }')
+    echo "$out"
+fi
+
+
+
 
 
 
