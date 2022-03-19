@@ -143,85 +143,126 @@ then
         -F "," \
         -v width="$WIDTH" \
         '{
-            if ($3 <= "5")
+            if ($3 <= 5)
             {
                 count5 += 1
                 next
             }
-            else if ($3 <= "15")
+            else if ($3 <= 15)
             {
                 count15 += 1
                 next
             }
-            else if ($3 < "25")
+            else if ($3 <= 25)
             {
                 count25 += 1
                 next
             }
-            else if ($3 < "35")
+            else if ($3 <= 35)
             {
                 count35 += 1
                 next
             }
-            else if ($3 < "45")
+            else if ($3 <= 45)
             {
                 count45 += 1
                 next
             }
-            else if ($3 < "55")
+            else if ($3 <= 55)
             {
                 count55 += 1
                 next
             }
-            else if ($3 < "65")
+            else if ($3 <= 65)
             {
                 count65 += 1
                 next
             }
-            else if ($3 < "75")
+            else if ($3 <= 75)
             {
                 count75 += 1
                 next
             }
-            else if ($3 < "85")
+            else if ($3 <= 85)
             {
                 count85 += 1
                 next
             }
-            else if ($3 < "95")
+            else if ($3 <= 95)
             {
                 count95 += 1
                 next
             }
-            else if ($3 < "105")
+            else if ($3 <= 105)
             {
                 count105 += 1
                 next
             }
             else 
+            {
                 countel += 1
             }
-            END { 
-            if (width="0")
-                width = 10000
-            if (width="")
-            {
-                    printf("0-5   :%d\n", count5)
-                    printf("6-15  :%d\n", count15)
-                    printf("16-25 :%d\n", count25)
-                    printf("26-35 :%d\n", count35)
-                    printf("36-45 :%d\n", count45)
-                    printf("46-55 :%d\n", count55)
-                    printf("56-65 :%d\n", count65)
-                    printf("6-15  :%d\n", count15)
-                    printf("66-75 :%d\n", count75)
-                    printf("76-85 :%d\n", count85)
-                    printf("86-95 :%d\n", count95)
-                    printf("96-105:%d\n", count105)
-                    printf(">105  :%d\n", countel)
-                
             }
-        
+            END { 
+            if (width == 0)
+            {
+                width = 10000
+            }
+            if (width == "")
+            {
+                printf("0-5   :%d\n", count5)
+                printf("6-15  :%d\n", count15)
+                printf("16-25 :%d\n", count25)
+                printf("26-35 :%d\n", count35)
+                printf("36-45 :%d\n", count45)
+                printf("46-55 :%d\n", count55)
+                printf("56-65 :%d\n", count65)
+                printf("66-75 :%d\n", count75)
+                printf("76-85 :%d\n", count85)
+                printf("86-95 :%d\n", count95)
+                printf("96-105:%d\n", count105)
+                printf(">105  :%d\n", countel)
+            }
+            else 
+            {
+                printf("0-5   :")
+                for (i = 0; i < (count5/width); i++) 
+                    printf("#")
+                printf("\n6-15  :")  
+                for (i = 0; i < (count15/width); i++) 
+                    printf("#")
+                printf("\n16-25 :")  
+                for (i = 0; i < (count25/width); i++) 
+                    printf("#")
+                printf("\n26-35 :")  
+                for (i = 0; i < (count35/width); i++) 
+                    printf("#")
+                printf("\n36-45 :") 
+                for (i = 0; i < (count45/width); i++) 
+                    printf("#")
+                printf("\n46-55 :")    
+                for (i = 0; i < (count55/width); i++) 
+                    printf("#")
+                printf("\n56-65 :")    
+                for (i = 0; i < (count65/width); i++) 
+                    printf("#")
+                printf("\n66-75 :")    
+                for (i = 0; i < (count75/width); i++) 
+                    printf("#")
+                printf("\n76-85 :")    
+                for (i = 0; i < (count85/width); i++) 
+                    printf("#")
+                printf("\n86-95 :")    
+                for (i = 0; i < (count95/width); i++) 
+                    printf("#")
+                printf("\n96-105:")     
+                for (i = 0; i < (count105/width); i++) 
+                    printf("#")
+                printf("\n>105  :")    
+                for (i = 0; i < (countel/width); i++) 
+                    printf("#")
+
+                }
         }')
     echo "$out"
 fi
